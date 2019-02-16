@@ -1,0 +1,15 @@
+.timeline {
+  &__avatar {
+    border-radius: 100px;
+    width: 60px;
+  }
+
+  &__empty {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.vertical-timeline {
+  margin-top: 0px !important;
+}

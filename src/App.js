@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import 'react-vertical-timeline-component/style.min.css';
 import Timeline from './components/Timeline'
 import fetch from 'cross-fetch';
-import Loader from 'react-loader-spinner'
-import LoadingOverlay from 'react-loading-overlay';
 import _ from 'lodash';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { ClipLoader } from 'react-spinners';
+import block from 'bem-cn';
+
+export const className = block('timeline');
 
 class App extends Component {
 
@@ -14,8 +15,6 @@ class App extends Component {
     super(props);
 
     this.state = {
-      response: [],
-      fetched: false,
       users: []
     }
   };
@@ -55,10 +54,9 @@ class App extends Component {
   };
 
   parseUsers(body) {
-    body.map(item => {
+    body.forEach(item => {
       this.fetchData(item.url+'/events');
-    })
-    this.setState({ fetched: true} )
+    });
   };
 
   parseFetch(body) {
@@ -67,11 +65,22 @@ class App extends Component {
   };
 
   render() {
-    const { users, fetched } = this.state;
+    const { users } = this.state;
+    const loading = users.length === 0;
     return (
-      <LoadingOverlay active={!fetched} spinner={<Loader type="Puff" color="#aaaaaa" height={80} width={80} />}>
-        {<Timeline users={users} />}
-      </LoadingOverlay>
+      <div className = {className()}>
+        {
+          loading
+            ? <div className = {className('loader')}>
+                <ClipLoader
+                  sizeUnit={"px"}
+                  size={150}
+                  loading={loading}
+                />
+              </div>
+            : <Timeline users={users} />
+        }
+      </div>
     );
   };
 };
