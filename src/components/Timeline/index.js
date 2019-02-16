@@ -3,6 +3,7 @@ import './index.css';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import moment from 'moment';
+import _ from 'lodash';
 
 export function Lines({ lines }) {
   return lines.map((line, index) =>
@@ -22,14 +23,15 @@ export function Lines({ lines }) {
 class Timeline extends React.Component {
 
   render() {
-    const { response } = this.props;
-    console.log(response)
+    const { users } = this.props;
+    const response = _.reverse(_.sortBy(_.flatten(users), [function(o) {return new Date(o.created_at)}]));
+
     return (
-      response
+      response.length > 0
         ? <VerticalTimeline>
           <Lines lines={response} />
         </VerticalTimeline>
-        : null
+        : <p>No data</p>
     );
   }
 }
