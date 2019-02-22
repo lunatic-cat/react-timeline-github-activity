@@ -26,9 +26,8 @@ export function Lines({ lines }) {
 class Timeline extends React.Component {
 
   render() {
-    const { users } = this.props;
-    const response = _.reverse(_.sortBy(_.flatten(users), [function(o) {return new Date(o.created_at)}]));
-
+    const { response } = this.props;
+    console.log(response)
     return (
       response.length > 0
         ? <VerticalTimeline>

@@ -1,0 +1,11 @@
+p.options {
+  &__panel {
+    display: flex;
+    justify-content: center;
+    flex: 2;
+  }
+
+  &__per-page {
+    flex: 1;
+  }
+}
