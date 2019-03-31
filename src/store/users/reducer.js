@@ -3,7 +3,7 @@ import * as types from './types';
 const initialState = {
   users: [],
   composeActivity: true,
-  activityPerPage: 30
+  activityPerPage: 100
 };
 
 export default function (state = initialState, action) {

@@ -37,18 +37,6 @@ function Options ({ children, perPage, onChange }) {
           <Typography className={className('panel').toString()}>Additional settings for displaying activities</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <TextField
-            id="outlined-number"
-            label="Per Page"
-            value={perPage}
-            onChange={event => onChange(event.target.value)}
-            type="number"
-            className={className('per-page').toString()}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
         </ExpansionPanelDetails>
       </ExpansionPanel>
       {children}
