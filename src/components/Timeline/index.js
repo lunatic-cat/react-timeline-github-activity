@@ -52,17 +52,8 @@ export function Lines({ lines, classes }) {
       date={moment(line.created_at).format("dddd, MMMM Do YYYY")}
       icon={<img src={line.actor.avatar_url} alt="" className={ className('avatar') }></img>}
       line={line}>
-       <Grid container spacing={40}>
-        <Grid item xs={6} sm={3}>
-          <Chip
-            icon={<FaceIcon />}
-            label={line.type}
-            className={classes.chip}
-            color="primary"
-            variant="outlined"
-          />
-        </Grid>
-        <Grid item xs={6} sm={3}>
+       <Grid container spacing={16}>
+       <Grid item xs={3} sm={3}>
           <Chip
             clickable
             href={`https://github.com/${line.actor.display_login}`}
@@ -70,6 +61,15 @@ export function Lines({ lines, classes }) {
             component="a"
             className={classes.chip}
             color="secondary"
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs={3} sm={3}>
+          <Chip
+            icon={<FaceIcon />}
+            label={line.type}
+            className={classes.chip}
+            color="primary"
             variant="outlined"
           />
         </Grid>
