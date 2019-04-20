@@ -8,6 +8,14 @@
     display: flex;
     align-items: center;
   }
+
+  &__commits {
+    padding: 10px;
+
+    &__sha {
+      padding: 10px 0px;
+    }
+  }
 }
 
 .vertical-timeline {
