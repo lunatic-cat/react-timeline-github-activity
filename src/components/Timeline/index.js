@@ -3,7 +3,6 @@ import './index.scss';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import moment from 'moment';
-import _ from 'lodash';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
@@ -12,45 +11,42 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import FaceIcon from '@material-ui/icons/Face';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import SnackbarContent  from '@material-ui/core/SnackbarContent';  
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import _ from 'lodash';
+import PushEvent from './PushEvent';
 
 const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
   badge: {
     top: '30%',
     right: -40,
-    // The border color match the background color.
     border: `1px solid ${
       theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[900]
     }`,
   },
 });
 
-export function pushEventLine(item) {
-  return (
-  <Grid item xs={12} sm={12}>
-    <Divider light />
-    <p>
-      <Grid item xs={8} justify="flex-end" sm={8}>
-        { item.sha }
-      </Grid>
-    </p>
-    <Grid item xs={12} justify="flex-end" sm={12}>
-      <p>
-         <SnackbarContent message = { item.message }
-         />
-      </p>
-    </Grid>
-  </Grid>)
+function getEventByType(type, line) {
+  switch(type) {
+    case 'PushEvent':
+      return line.payload.commits.map( (item, key) => <div className={ className('commits') } key={key}><PushEvent item={item} /></div> )
+      break;
+    default:
+      break;
+  }
 }
 
-export function Lines({ lines, classes }) {
+export function Lines({ lines, classes, onChangeUser }) {
   return lines.map((line, index) =>
     <VerticalTimelineElement
       className="vertical-timeline-element--work"
       key={index}
       date={moment(line.created_at).format("dddd, MMMM Do YYYY")}
-      icon={<img src={line.actor.avatar_url} alt="" className={ className('avatar') }></img>}
+      icon={<img src={line.actor.avatar_url} alt="" className={ className('avatar') } onClick={e => onChangeUser(line.actor.display_login)}></img>}
       line={line}>
        <Grid container spacing={16}>
        <Grid item xs={3} sm={3}>
@@ -79,13 +75,7 @@ export function Lines({ lines, classes }) {
               <Typography variant="h5" component="h2">
                 <a href={`https://github.com/${line.repo.name}`}>{line.repo.name}</a>
               </Typography>
-              <Typography variant="body1" gutterBottom component="body1">
-                { 
-                  _.eq(line.type, 'PushEvent')
-                    ? line.payload.commits.map( item => pushEventLine(item) )
-                    : null
-                }
-              </Typography>
+                  { getEventByType(line.type, line) }
             </CardContent>
           </Card>
         </Grid>
@@ -97,15 +87,28 @@ export function Lines({ lines, classes }) {
 
 class Timeline extends React.Component {
 
+  handleChange = (event, value) => {
+    if (_.eq(value, 0)) this.props.changeComposeUsers(null);
+  };
+
+  valueByUser(user) {
+    return !user ? 0 : 1;
+  }
+
   render() {
-    const { response, classes  } = this.props;
-    console.log(response)
+    const { response, classes, changeComposeUsers, activeUser } = this.props;
     return (
-      response.length > 0
-        ? <VerticalTimeline>
-            <Lines lines={response} classes ={classes } />
-          </VerticalTimeline>
-        : <p className = { className('is-empty') }>No data</p>
+      <div className={classes.root}>
+        <AppBar position="static" color="secondary">
+          <Tabs value={this.valueByUser(activeUser)} onChange={this.handleChange}>
+            <Tab label='All Users' />
+            { activeUser ? <Tab label={activeUser} /> : null }
+          </Tabs>
+        </AppBar>
+        <VerticalTimeline>
+          <Lines lines={response} classes ={classes} onChangeUser={changeComposeUsers}/>
+        </VerticalTimeline>
+      </div>
     );
   }
 }

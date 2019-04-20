@@ -1,23 +1,25 @@
 import * as types from './types';
 import _ from 'lodash';
 
-export function changeUsersData(users) {
+export function changeUsersData(userData, userName) {
   return {
     type: types.USERS_FETCHED,
-    users: users
+    userData: userData,
+    userName: userName
   };
 };
 
-export function changeActivityPerPage(activityPerPage) {
+export function changeUsersCount(usersCount) {
   return {
-    type: types.CHANGED_ACTIVITY_COUNT,
-    activityPerPage: _.parseInt(activityPerPage)
+    type: types.CHANGED_USERS_COUNT,
+    usersCount: _.parseInt(usersCount)
   };
 };
 
-export function changeComposeUsers() {
+export function changeComposeUsers(activeUserName) {
   return {
-    type: types.CHANGED_COMPOSE_FLAG
+    type: types.CHANGED_COMPOSE_FLAG,
+    activeUserName: activeUserName
   };
 };
 

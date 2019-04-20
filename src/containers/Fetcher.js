@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { changeUsersData, changeActivityPerPage } from '../store/users/actions';
-import Timeline from '../components/Timeline';
-import Options from '../components/Options';
+import { changeUsersData, changeUsersCount } from '../store/users/actions';
+import Timeline from './Timeline';
 import fetch from 'cross-fetch';
 import _ from 'lodash';
 import { ClipLoader } from 'react-spinners';
@@ -10,9 +9,9 @@ import { className } from '../App';
 
 const mapStateToProps = state => {
   return {
-    usersData: state.response.users,
-    composeUsersData: state.response.composeActivity,
+    grouppedUsersData: state.response.grouppedUsersData,
     dataCountForUser: state.response.activityPerPage,
+    usersCount: state.response.usersCount
   };
 };
 
@@ -20,12 +19,6 @@ export class Fetcher extends React.Component {
 
   componentDidMount() {
     this.fetchOrgUsers()
-  };
-
-  componentDidUpdate(prevProps){
-    if (prevProps.dataCountForUser !== this.props.dataCountForUser ) {
-      this.fetchOrgUsers();
-    }
   };
 
   fetchOrgUsers() {
@@ -42,7 +35,7 @@ export class Fetcher extends React.Component {
       });
   };
 
-  fetchData(url) {
+  fetchData(url, login) {
     const { dataCountForUser } = this.props;
     const query = `?per_page=${dataCountForUser}`
     fetch(url+query)
@@ -52,8 +45,8 @@ export class Fetcher extends React.Component {
       }
       return res.json();
     })
-    .then(user => {
-      this.parseFetch(user)
+    .then(data => {
+      this.props.dispatch(changeUsersData(data, login))
     })
     .catch(err => {
       console.error(err);
@@ -61,30 +54,17 @@ export class Fetcher extends React.Component {
   };
 
   parseUsers(body) {
+    this.props.dispatch(changeUsersCount(body.length))
     body.forEach(item => {
-      this.fetchData(item.url+'/events');
+      this.fetchData(item.url+'/events', item.login);
     });
   };
 
-  parseFetch(body) {
-    const users = _.concat(this.props.usersData, [body]);
-    this.props.dispatch(changeUsersData(users))
-  };
-
-  onChangeActivityCount(perPage){
-    this.props.dispatch(changeUsersData([]));
-    this.props.dispatch(changeActivityPerPage(perPage));
-  }
-
   render() {
-    const { usersData, composeUsersData, dataCountForUser } = this.props;
-    const users = _.flatten(usersData);
-    const response = composeUsersData 
-      ? _.reverse(_.sortBy(users, [function(o) {return new Date(o.created_at)}]))
-      : users
-    const loading = response.length === 0;
+    const { grouppedUsersData, usersCount } = this.props;
+    const loading = !_.eq(_.size(_.take(grouppedUsersData)[0]), usersCount);
+
     return (
-      <Options perPage={dataCountForUser} onChange={perPage => this.onChangeActivityCount(perPage)}>
         <div className = {className()}>
           {
             loading
@@ -95,10 +75,9 @@ export class Fetcher extends React.Component {
                     loading={loading}
                   />
                 </div>
-              : <Timeline response={response} />
+              : <Timeline />
           }
         </div>
-      </Options>
     );
   }
 };

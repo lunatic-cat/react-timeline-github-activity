@@ -31,15 +31,6 @@ const theme = createMuiTheme({
 });
 
 class App extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      users: []
-    }
-  };
-
   render() {
     return (
       <MuiThemeProvider theme={theme}>
