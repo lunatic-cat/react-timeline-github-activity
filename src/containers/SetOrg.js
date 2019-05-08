@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { changeOrganization } from '../store/organization/actions';
 import { togglePopup, changeOrganizationName } from '../store/popupUi/actions';
 import Popup from '../components/Popup';
-import _ from 'lodash';
 import DataFetcher from './Fetcher';
 
 const mapStateToProps = state => {
