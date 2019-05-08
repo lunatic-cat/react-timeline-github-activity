@@ -1,18 +1,15 @@
 sudo: false
-
 language: node_js
 node_js:
-  - 10
-
+- 10
 branches:
   only:
-    - master
-
+  - master
 deploy:
   provider: heroku
   app: team-github-timeline
   api_key:
-    secure: 3538b956-f10c-409b-8cb2-f8ca051da541
+    secure: Oyn/4lVH2MM+LQJuTeEE77S+8+ZvNeuaRb5Vt1tn3HHIGhJCBzqzXaRvnSCFIJFeD++LxIbc6o8ZfMXldIuFcqp49+EBelHUc11v2G8D5cuk5UZ7XZkoZMfPbo4kZ4hUlUo9o88tOONg1ADmnAsHoHk9pPqdKxg+8DvXhg5KwNyQiykk53nRTQC6iGbhIdOn8gw30feIhbaR0ZSGKlQeSUiSKf4Nqv6FcI0prRVONwFPe1eK4meZFO7Swm661lOKTOQntCPIqZRjVMc6S6RCgHTWzs/B4ySWHNqxGeHeGDYBxMRF0evTRBX9Lvu6b59q5ftJKHU/K7AaPxLHpWxGiHI/813vgye7tqKbpRSGZfRLFw2tSxzzmdejJbQP3wfj2PxiUwt8xgwkKCALxoBL7xOP7dVUByv6MAuHI1pqZ2s2iptmtYHZc688jvS8QYUeeyJTHnKkapnXqfdA+kQbtqAl35dbrUBtTeQYDPQyiCEm+EqRvWiPn0rgjoAizoglCj0rJAUfsEuqE7qBv1HnEpG6cLYWsvlVQPH6Zkj/Gh603haWO0M8gCD/GxL5Qczx5i36dFWU0zAObnN8WmjgP/AekVVF+nrxgMAVh8ZN8+uXAWs5XqF8RvgybeoYdP3eE9CfG3/f7JU5onh76Sk9yvmE35LrVDOI2atrGwZnj0U=
 after_success:
-  - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+- cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
+- cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
