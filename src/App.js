@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import './App.scss';
 import 'react-vertical-timeline-component/style.min.css';
-import DataFetcher from './containers/Fetcher';
 import block from 'bem-cn';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import blue from '@material-ui/core/colors/blue';
+
+const SetOrganization = React.lazy(() => import('./containers/SetOrg'));
 
 export const className = block('timeline');
 
@@ -34,7 +35,9 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-        <DataFetcher />
+        <Suspense fallback={<div className = {className('loader')}>Loading...</div>}>
+          <SetOrganization />
+        </Suspense>
       </MuiThemeProvider>
     );
   };

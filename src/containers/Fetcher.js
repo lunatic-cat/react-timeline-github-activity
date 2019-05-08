@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { changeUsersData, changeUsersCount } from '../store/users/actions';
+import { changeOrganization } from '../store/organization/actions';
 import Timeline from './Timeline';
 import fetch from 'cross-fetch';
 import _ from 'lodash';
@@ -9,6 +10,7 @@ import { className } from '../App';
 
 const mapStateToProps = state => {
   return {
+    organization: state.organization,
     grouppedUsersData: state.response.grouppedUsersData,
     dataCountForUser: state.response.activityPerPage,
     usersCount: state.response.usersCount
@@ -22,7 +24,7 @@ export class Fetcher extends React.Component {
   };
 
   fetchOrgUsers() {
-    fetch('https://api.github.com/orgs/lunatic-cat/members')
+    fetch(`https://api.github.com/orgs/${this.props.organization}/members`)
       .then(res => {
         if (res.status >= 400) {
           throw new Error("Bad response from server");
@@ -31,7 +33,7 @@ export class Fetcher extends React.Component {
       })
       .then(body => this.parseUsers( body ))
       .catch(err => {
-        console.error(err);
+        this.props.dispatch(changeOrganization(null))
       });
   };
 

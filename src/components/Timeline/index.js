@@ -70,14 +70,16 @@ export function Lines({ lines, classes, onChangeUser }) {
           />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <Card>
-            <CardContent>
-              <Typography variant="h5" component="h2">
-                <a href={`https://github.com/${line.repo.name}`}>{line.repo.name}</a>
-              </Typography>
-                  { getEventByType(line.type, line) }
-            </CardContent>
-          </Card>
+          { line.repo.map( (repo, index) => 
+            <Card key = {index}>
+              <CardContent>
+                <Typography variant="h5" component="h2">
+                  <a href={`https://github.com/${repo.name}`}>{repo.name}</a>
+                </Typography>
+                    { getEventByType(line.type, line) }
+              </CardContent>
+            </Card>
+          )}
         </Grid>
       </Grid>
      
@@ -93,7 +95,7 @@ class Timeline extends React.Component {
 
   valueByUser(user) {
     return !user ? 0 : 1;
-  }
+  };
 
   render() {
     const { response, classes, changeComposeUsers, activeUser } = this.props;
