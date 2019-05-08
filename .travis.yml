@@ -7,3 +7,12 @@ node_js:
 branches:
   only:
     - master
+
+deploy:
+  provider: heroku
+  app: team-github-timeline
+  api_key:
+    secure: 3538b956-f10c-409b-8cb2-f8ca051da541
+after_success:
+  - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
