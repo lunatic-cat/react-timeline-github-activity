@@ -10,11 +10,29 @@ const initialState = {
   activeUser: null
 };
 
+function constructDataItem(item) {
+  return {
+    actor: item.actor,
+    payload: item.payload,
+    type: item.type,
+    created_at: item.created_at,
+    repo: [item.repo]
+  }
+};
+
+function cleaningData(data) {
+  const newData = _.compact(data.map( item => {
+      return _.eq(item.type, "WatchEvent") ? null : constructDataItem(item)
+    }
+  ));
+  return newData;
+};
+
 export default function (state = initialState, action) {
   switch (action.type) {
     case types.USERS_FETCHED:
       const { userData, userName } = action;
-      const grouppedUsersData = Object.assign(_.take(state.grouppedUsersData)[0] || {}, { [userName]: userData });
+      const grouppedUsersData = Object.assign(_.take(state.grouppedUsersData)[0] || {}, { [userName]: cleaningData(userData) });
 
       return {...state, grouppedUsersData: [grouppedUsersData] };
     case types.CHANGED_COMPOSE_FLAG:
