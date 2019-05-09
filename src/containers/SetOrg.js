@@ -14,19 +14,19 @@ const mapStateToProps = state => {
 };
 
 
-export class TimelineContainer extends Component {    
-    render() {
-        const { organization, popupOpen, organizationName, dispatch } = this.props;
+export class TimelineContainer extends Component {
+  render() {
+    const { organization, popupOpen, organizationName, dispatch } = this.props;
 
-        return !organization
-           ? <Popup
-                onChangeOrg={orgName => dispatch(changeOrganization(orgName))}
-                onChangeOrgName={orgName => dispatch(changeOrganizationName(orgName))}
-                togglePopup={toggle => dispatch(togglePopup(toggle))}
-                organizationName={organizationName}
-                popupOpen={popupOpen}/>
-           : <DataFetcher />
-    }
+    return !organization
+      ? <Popup
+        onChangeOrg={orgName => dispatch(changeOrganization(orgName))}
+        onChangeOrgName={orgName => dispatch(changeOrganizationName(orgName))}
+        togglePopup={toggle => dispatch(togglePopup(toggle))}
+        organizationName={organizationName}
+        popupOpen={popupOpen} />
+      : <DataFetcher />
+  }
 };
 
 export default connect(mapStateToProps)(TimelineContainer);

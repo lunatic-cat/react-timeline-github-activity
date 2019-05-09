@@ -1,0 +1,1 @@
+export const datePickerLabel = 'Date for start timeline'

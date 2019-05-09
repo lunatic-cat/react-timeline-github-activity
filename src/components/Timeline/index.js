@@ -20,10 +20,10 @@ import PushEvent from './PushEvent';
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    boxSizing: 'initial'
   },
   badge: {
     top: '30%',
-    right: -40,
     border: `1px solid ${
       theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[900]
     }`,
@@ -101,7 +101,7 @@ class Timeline extends React.Component {
     const { response, classes, changeComposeUsers, activeUser } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="secondary">
+        <AppBar position="relative" color="secondary">
           <Tabs value={this.valueByUser(activeUser)} onChange={this.handleChange}>
             <Tab label='All Users' />
             { activeUser ? <Tab label={activeUser} /> : null }
