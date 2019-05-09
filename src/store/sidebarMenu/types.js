@@ -1,0 +1,2 @@
+export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
+export const CHANGE_START_DATE = 'CHANGE_START_DATE';

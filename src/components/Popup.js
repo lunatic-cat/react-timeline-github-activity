@@ -14,8 +14,8 @@ function InitialPopup(props) {
 
   function handleClose() {
     if (props.organizationName) {
-        saveOrganization()
-        props.togglePopup(false);
+      saveOrganization()
+      props.togglePopup(false);
     }
   }
 
@@ -37,7 +37,7 @@ function InitialPopup(props) {
             id="name"
             label="Github organization name"
             type="text"
-            onChange={ e => props.onChangeOrgName(e.target.value) }
+            onChange={e => props.onChangeOrgName(e.target.value)}
             fullWidth
           />
         </DialogContent>
