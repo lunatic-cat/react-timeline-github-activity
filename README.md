@@ -1,6 +1,5 @@
 # Team GitHub Timeline
 [![Travis][build-badge]][build]
-[![Coveralls][coveralls-badge]][coveralls]
 
 Awesome Team GitHub Timeline!
 
