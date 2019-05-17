@@ -14,7 +14,7 @@ const mapStateToProps = state => {
 };
 
 
-export class TimelineContainer extends Component {
+export class SetOrgContainer extends Component {
   render() {
     const { organization, popupOpen, organizationName, dispatch } = this.props;
 
@@ -29,4 +29,4 @@ export class TimelineContainer extends Component {
   }
 };
 
-export default connect(mapStateToProps)(TimelineContainer);
+export default connect(mapStateToProps)(SetOrgContainer);

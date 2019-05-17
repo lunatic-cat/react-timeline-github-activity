@@ -20,9 +20,19 @@ const mapStateToProps = state => {
 };
 
 export class Fetcher extends React.Component {
+  constructor(props) {
+    super(props);
+    this.fetchOrgUsers = this.fetchOrgUsers.bind(this);
+    window.fetchOrgUsers = this.fetchOrgUsers;
+  }
 
   componentDidMount() {
-    this.fetchOrgUsers()
+    this.fetchOrgUsers();
+    this.timeouts = [];
+  };
+
+  componentWillUnmount() {
+    (this.timeouts || []).map(t => window.clearTimeout(t));
   };
 
   fetchOrgUsers() {
@@ -59,6 +69,8 @@ export class Fetcher extends React.Component {
 
   parseUsers(body) {
     this.props.dispatch(changeUsersCount(body.length))
+    const t = window.setTimeout(this.fetchOrgUsers, 300 * 1000);
+    this.timeouts.push(t);
     body.forEach(item => {
       this.fetchData(item.url + '/events', item.login);
     });

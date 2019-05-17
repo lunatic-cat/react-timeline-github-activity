@@ -1,6 +1,7 @@
 import * as types from './types';
 
-const initialState = null;
+// TODO: react-router
+const initialState = window.location.pathname.replace("/", '');
 
 export default function (state = initialState, action) {
   switch (action.type) {

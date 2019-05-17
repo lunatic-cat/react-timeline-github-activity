@@ -9,6 +9,7 @@ const mapStateToProps = state => {
   const responseData = _.take(state.response.grouppedUsersData)[0];
   const startDate = state.sidebarMenu.startDate;
   return {
+    organization: state.organization,
     grouppedUsersData: responseData,
     composeUsersData: state.response.composeActivity,
     dataCountForUser: state.response.activityPerPage,
@@ -31,13 +32,13 @@ export class TimelineContainer extends React.Component {
   }
 
   render() {
-    const { grouppedUsersData, composeUsersData, activeUser, dispatch } = this.props;
+    const { grouppedUsersData, composeUsersData, activeUser, dispatch, organization } = this.props;
     const data = composeUsersData && !activeUser ? _.flatten(_.values(grouppedUsersData)) : this.getUserData(activeUser, grouppedUsersData);
     const filteredData = this.filterByDate(data);
     const sortedData = _.reverse(_.sortBy(filteredData, [function (o) { return new Date(o.created_at) }]))
 
     return (
-      <Timeline response={sortedData} activeUser={activeUser} changeComposeUsers={userName => dispatch(changeComposeUsers(userName))} />
+      <Timeline response={sortedData} activeUser={activeUser} changeComposeUsers={userName => dispatch(changeComposeUsers(userName))} organization={organization} />
     );
   }
 };

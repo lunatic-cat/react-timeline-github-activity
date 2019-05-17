@@ -98,12 +98,12 @@ class Timeline extends React.Component {
   };
 
   render() {
-    const { response, classes, changeComposeUsers, activeUser } = this.props;
+    const { response, classes, changeComposeUsers, activeUser, organization } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="relative" color="secondary">
           <Tabs value={this.valueByUser(activeUser)} onChange={this.handleChange}>
-            <Tab label='All Users' />
+            <Tab label={organization} />
             { activeUser ? <Tab label={activeUser} /> : null }
           </Tabs>
         </AppBar>
