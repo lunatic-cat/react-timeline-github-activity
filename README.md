@@ -3,5 +3,5 @@
 
 Awesome Team GitHub Timeline!
 
-[build-badge]: https://img.shields.io/travis/lunatic-cat/React_timeline_github_team_activity/master.png?style=flat-square
-[build]: https://travis-ci.org/lunatic-cat/React_timeline_github_team_activity
+[build-badge]: https://img.shields.io/travis/lunatic-cat/react-timeline-github-activity/master.png?style=flat-square
+[build]: https://travis-ci.org/lunatic-cat/react-timeline-github-activity
