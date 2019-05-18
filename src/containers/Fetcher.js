@@ -9,6 +9,10 @@ import _ from 'lodash';
 import { ClipLoader } from 'react-spinners';
 import { className } from '../App';
 
+function fetchCached (url) {
+  return fetch(url.replace('https://api.github.com', 'https://hackathonbrn.lunatic.cat'));
+}
+
 const mapStateToProps = state => {
   return {
     organization: state.organization,
@@ -36,7 +40,7 @@ export class Fetcher extends React.Component {
   };
 
   fetchOrgUsers() {
-    fetch(`https://api.github.com/orgs/${this.props.organization}/members`)
+    fetchCached(`https://api.github.com/orgs/${this.props.organization}/members`)
       .then(res => {
         if (res.status >= 400) {
           throw new Error("Bad response from server");
@@ -52,7 +56,7 @@ export class Fetcher extends React.Component {
   fetchData(url, login) {
     const { dataCountForUser } = this.props;
     const query = `?per_page=${dataCountForUser}`
-    fetch(url + query)
+    fetchCached(url + query)
       .then(res => {
         if (res.status >= 400) {
           throw new Error("Bad response from server");
