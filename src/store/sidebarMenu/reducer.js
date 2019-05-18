@@ -1,7 +1,7 @@
 import * as types from './types';
 
 const initialState = {
-  open: true,
+  open: false,
   startDate: '2019-05-17T08:00:00.000Z' // TODO accept from query
 };
 
