@@ -73,7 +73,7 @@ export class Fetcher extends React.Component {
 
   parseUsers(body) {
     this.props.dispatch(changeUsersCount(body.length))
-    const t = window.setTimeout(this.fetchOrgUsers, 60 * 60 * 1000);
+    const t = window.setTimeout(this.fetchOrgUsers, 60 * 1000);
     this.timeouts.push(t);
     body.forEach(item => {
       this.fetchData(item.url + '/events', item.login);
