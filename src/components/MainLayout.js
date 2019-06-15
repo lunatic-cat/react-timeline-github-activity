@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { styles } from './styles';
 
 function MainLayout(props) {
-  const { classes } = props;
+  const { classes, Component } = props;
 
   return (
     <div className={classes.root}>
@@ -23,7 +23,7 @@ function MainLayout(props) {
       </AppBar>
       <Drawer />
       <main className={classes.content}>
-        <Timeline />
+        <Component />
       </main>
     </div>
   );

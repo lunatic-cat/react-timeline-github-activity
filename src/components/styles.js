@@ -56,6 +56,10 @@ export const styles = theme => ({
     justifyContent: 'flex-end',
     padding: '0 8px'
   },
+  listIcon: {
+    paddingLeft: '8px',
+    marginRight: '8px'
+  },
   content: {
     flexGrow: 1
   },

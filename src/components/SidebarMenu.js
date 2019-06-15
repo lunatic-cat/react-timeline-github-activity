@@ -45,8 +45,8 @@ function MiniDrawer(props) {
         </div>
         <Divider />
         <List>
-          <ListItem button>
-            <ListItemIcon><CalendarTodayIcon /></ListItemIcon>
+          <ListItem button onClick={!props.open ? props.toggleSidebarMenu : null}>
+            <ListItemIcon className={classes.listIcon} ><CalendarTodayIcon /></ListItemIcon>
             <ListItemText primary={
               <DateTimePicker
                 label={consts.datePickerLabel}
