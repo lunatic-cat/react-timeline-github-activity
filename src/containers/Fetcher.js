@@ -10,14 +10,13 @@ const mapStateToProps = state => {
     organization: state.organization,
     grouppedUsersData: state.response.grouppedUsersData,
     dataCountForUser: state.response.activityPerPage,
-    usersCount: state.response.usersCount,
-    drawerOpen: state.sidebarMenu.open
+    usersCount: state.response.usersCount
   };
 };
 
 export class Fetcher extends React.Component {
   render() {
-    const { grouppedUsersData, usersCount, drawerOpen, dispatch } = this.props;
+    const { grouppedUsersData, usersCount, dispatch } = this.props;
     const loading = !_.eq(_.size(_.take(grouppedUsersData)[0]), usersCount);
 
     return (

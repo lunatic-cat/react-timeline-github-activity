@@ -60,6 +60,25 @@ export const styles = theme => ({
     paddingLeft: '8px',
     marginRight: '8px'
   },
+  charts: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '50px'
+  },
+  chartBlock: {
+    width: '100%'
+  },
+  chartLegend: {
+    minWidth: '200px'
+  },
+  chartsBody: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'row',
+    minHeight: '500px',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   content: {
     flexGrow: 1
   },

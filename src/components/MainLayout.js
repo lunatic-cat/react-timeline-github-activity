@@ -1,5 +1,4 @@
 import React from 'react';
-import Timeline from '../containers/Timeline';
 import Drawer from '../containers/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import clsx from 'clsx';

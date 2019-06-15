@@ -3,20 +3,21 @@ import { connect } from 'react-redux';
 import { toggleSidebarMenu } from '../store/sidebarMenu/actions';
 import MainLayout from '../components/MainLayout';
 import Timeline from '../containers/Timeline';
+import Chart from '../containers/Chart';
 
 const mapStateToProps = state => {
   return {
     drawerOpen: state.sidebarMenu.open,
-    component: selectComponent('Timeline') // Stub
+    component: selectComponent(state.componentId)
   };
 };
 
 const selectComponent = component => {
     switch(component) {
-        case 'Timeline':
+        case -1:
           return Timeline;
-        // case 'Chart':
-        //     return Chart;
+        case 1:
+          return Chart;
         default:
           return Timeline;
     };

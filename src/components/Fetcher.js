@@ -1,7 +1,6 @@
 import * as React from 'react';
 import MainContainer from '../containers/MainContainer';
 import fetch from 'cross-fetch';
-import _ from 'lodash';
 import { ClipLoader } from 'react-spinners';
 import { className } from '../App';
 
