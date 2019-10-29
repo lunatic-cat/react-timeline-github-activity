@@ -4,22 +4,34 @@ import ChartComponent from '../components/Chart';
 import _ from 'lodash';
 
 const mapStateToProps = state => {
-  const responseData = _.take(state.response.grouppedUsersData)[0];
-  const topUsers = _.take(_.reverse(_.sortBy(responseData, [function(o) { return o.length; }])), 3)
-  const groupedData = topUsers.map(item => {
+  const resp = _.take(state.response.grouppedUsersData)[0]
+  const activeUser = state.response.activeUser;
+  
+  return {
+    data: takeData(activeUser, resp)
+  }
+};
+
+const takeData = (activeUser, resp) => {
+  let currentData;
+  if (!activeUser) {
+    const responseData = _.filter(resp, function(o) { return !_.isEmpty(o) });
+    currentData = _.take(_.reverse(_.sortBy(responseData, [function(o) { return o.length; }])), 3)
+  }
+  else
+    currentData = _.take([resp[activeUser]]);
+
+  const groupedData = currentData.map(item => {
     return _.groupBy(item, w => w.type)
   });
-  const data = groupedData.map((item) => {
+
+  return groupedData.map((item) => {
     return _.compact(_.map(item, (a, e) => {
       if (e === 'PullRequestReviewCommentEvent') return;
       return { event: e, area: a.length, user: a[0].actor.login } 
     }))
   });
-
-  return {
-    data
-  };
-};
+}
 
 export class DrawerContainer extends Component {
   render() {
