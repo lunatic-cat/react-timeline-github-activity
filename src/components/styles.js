@@ -63,7 +63,7 @@ export const styles = theme => ({
   charts: {
     display: 'flex',
     alignItems: 'center',
-    padding: '50px'
+    padding: '50px',
   },
   chartBlock: {
     width: '100%'
@@ -75,9 +75,9 @@ export const styles = theme => ({
     display: 'flex',
     flex: 1,
     flexDirection: 'row',
-    minHeight: '500px',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexWrap: 'wrap'
   },
   content: {
     flexGrow: 1
