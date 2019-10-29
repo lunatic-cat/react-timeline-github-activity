@@ -25,7 +25,7 @@
     "react-router": "^5.1.2",
     "react-scripts": "^3.0.1",
     "react-spinners": "^0.5.1",
-    "react-vertical-timeline-component": "2.3.1",
+    "react-vertical-timeline-component": "2.5.0",
     "recharts": "^1.8.5",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
