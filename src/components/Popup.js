@@ -8,10 +8,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 function InitialPopup(props) {
-  function handleClickOpen() {
-    props.togglePopup(true);
-  }
-
   function handleClose() {
     if (props.organizationName) {
       saveOrganization()
