@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { styles } from './styles';
 import Paper from '@material-ui/core/Paper';
 import { PieChart, Pie, Sector } from 'recharts';
-import _ from 'lodash';
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
