@@ -9,8 +9,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import CachedIcon from '@material-ui/icons/Cached';
-import AutorenewIcon from '@material-ui/icons/Autorenew';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import PieChartIcon from '@material-ui/icons/PieChart';
 import List from '@material-ui/core/List';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { withStyles } from '@material-ui/core/styles';
@@ -58,7 +58,7 @@ function MiniDrawer(props) {
             } />
           </ListItem>
           <ListItem button onClick={props.changeComponent}>
-          <ListItemIcon className={classes.listIcon} >{ props.component > 0 ? <CachedIcon /> : <AutorenewIcon /> }</ListItemIcon>
+          <ListItemIcon className={classes.listIcon} >{ props.component > 0 ? <FormatListBulletedIcon /> : <PieChartIcon /> }</ListItemIcon>
             <ListItemText primary={
                 props.component > 0 ? 'View Timeline' : 'View Charts'
               }
