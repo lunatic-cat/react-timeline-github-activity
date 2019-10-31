@@ -34,7 +34,6 @@ function getEventByType(type, line) {
   switch(type) {
     case 'PushEvent':
       return line.payload.commits.map( (item, key) => <div className={ className('commits') } key={key}><PushEvent item={item} /></div> )
-      break;
     default:
       break;
   }
