@@ -56,13 +56,11 @@ class ChartComponent extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/hqnrgxpj/';
 
   state = {
-    indexes: [],
+    indexes: {},
   };
 
   onPieEnter = (e, index) => {
-    this.setState({
-      indexes: _.concat(this.state.indexes, this.state.indexes[index] = { activeIndex: e.name })
-    });
+    this.setState(state => Object.assign({}, state, { indexes: Object.assign({}, state.indexes, { [index]: e.name }) }));
   };
 
   render() {
@@ -75,7 +73,7 @@ class ChartComponent extends PureComponent {
             return (
               <PieChart key={index} width={800} height={400}>
                 <Pie
-                  activeIndex={(this.state.indexes[index] || {}).activeIndex || 0}
+                  activeIndex={this.state.indexes[index] || 0}
                   activeShape={renderActiveShape}
                   data={item}
                   innerRadius={120}
