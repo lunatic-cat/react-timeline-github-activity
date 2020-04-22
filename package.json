@@ -50,6 +50,6 @@
   ],
   "devDependencies": {
     "codecov.io": "^0.1.6",
-    "coveralls": "^3.0.7"
+    "coveralls": "^3.0.13"
   }
 }
