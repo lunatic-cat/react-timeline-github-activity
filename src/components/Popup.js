@@ -39,7 +39,7 @@ function InitialPopup(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Accept
+            Go
           </Button>
         </DialogActions>
       </Dialog>
